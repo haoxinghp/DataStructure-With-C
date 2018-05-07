@@ -49,7 +49,7 @@ public:
     void print() {
         std::cout << "Stack: size = " << array->getSize() << ", capacity = " << array->getCapacity() << std::endl;
         std::cout << "bottom ";
-        array->toString();
+        array->toPrint();
         std::cout << " top" << std::endl;
     }
 

@@ -23,7 +23,7 @@ public:
 
 
 template<class T>
-class Linklist {
+class LinkList {
 public:
     class Range {
     };
@@ -31,7 +31,7 @@ public:
     class Empty {
     };
 
-    Linklist() {
+    LinkList() {
         head = new Node<T>();
         size = 0;
     }
@@ -166,6 +166,27 @@ public:
             }
         }
         std::cout << "]" << std::endl;
+    }
+
+    int getSize() {
+        return size;
+    }
+
+    bool isEmpty() {
+        return size == 0;
+    }
+
+    void toPrint(){
+        Node<T> *prev = head;
+        std::cout << "[";
+        for (int i = 0; i < size; ++i) {
+            prev = prev->next;
+            std::cout << prev->e;
+            if (i < size - 1) {
+                std::cout << ", ";
+            }
+        }
+        std::cout << "]";
     }
 
 private:

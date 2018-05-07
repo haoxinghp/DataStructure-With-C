@@ -14,7 +14,7 @@ public:
     class Empty {
     };
 
-    LoopQueue(){
+    LoopQueue() {
         data = new T[10];
         front = 0;
         tail = 0;

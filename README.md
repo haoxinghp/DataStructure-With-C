@@ -12,9 +12,11 @@
 * Queue.h 队列模板类
 * Stack.h 栈模板类
 * Array.h
-* ArrayStack.h 
+* ArrayStack.h
+* LinkListStack.h
 * ArrayQueue.h
 * LoopQueue.h
+* LinkListQueue.h
 * LinkList.h
 
 #### 如何使用代码

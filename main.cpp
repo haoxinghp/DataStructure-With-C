@@ -4,6 +4,22 @@
 #include "ArrayQueue.h"
 #include "LoopQueue.h"
 #include "LinkList.h"
+#include "LinkListStack.h"
+#include "LinkListQueue.h"
+
+template<typename T>
+double testQueue(T *queue, int opCount) {
+    clock_t startTime = clock();
+    srand(66);
+    for (int i = 0; i < opCount; ++i) {
+        queue->enqueue(rand());
+    }
+    for (int j = 0; j < opCount; ++j) {
+        queue->dequeue();
+    }
+    clock_t endTime = clock();
+    return double(endTime - startTime) / CLOCKS_PER_SEC;
+}
 
 int main() {
     ArrayStack<int> *stack = new ArrayStack<int>(5);
@@ -17,6 +33,18 @@ int main() {
     stack->pop();
     stack->print();
     std::cout << stack->peek() << std::endl;
+
+    LinkListStack<int> *linkListStack = new LinkListStack<int>();
+    for (int i = 0; i < 5; ++i) {
+        linkListStack->push(i);
+        linkListStack->print();
+    }
+    linkListStack->push(300);
+    linkListStack->push(500);
+    linkListStack->print();
+    linkListStack->pop();
+    linkListStack->print();
+    std::cout << linkListStack->peek() << std::endl;
 
     ArrayQueue<int> *queue = new ArrayQueue<int>(5);
     for (int j = 0; j < 5; ++j) {
@@ -42,7 +70,19 @@ int main() {
     loopQueue1->print();
     std::cout << loopQueue1->getFront() << std::endl;
 
-    Linklist<int> *linklist = new Linklist<int>();
+    LinkListQueue<int> *linkListQueue1 = new LinkListQueue<int>();
+    for (int j = 0; j < 5; ++j) {
+        linkListQueue1->enqueue(j);
+        linkListQueue1->print();
+    }
+    linkListQueue1->enqueue(20);
+    linkListQueue1->enqueue(33);
+    linkListQueue1->print();
+    linkListQueue1->dequeue();
+    linkListQueue1->print();
+    std::cout << linkListQueue1->getFront() << std::endl;
+
+    LinkList<int> *linklist = new LinkList<int>();
     for (int i = 0; i < 5; ++i) {
         linklist->addFirst(i);
     }
@@ -61,32 +101,16 @@ int main() {
     linklist->setLast(23);
     linklist->print();
     std::cout << linklist->get(2) << " , " << linklist->getFirst() << " , " << linklist->getLast() << std::endl;
-    std::cout << std::boolalpha << linklist->contains(1);
+    std::cout << std::boolalpha << linklist->contains(1) << std::endl;
     linklist->removeElement(1);
     linklist->print();
 
     int opCount = 100000;
     ArrayQueue<int> *arrayQueue = new ArrayQueue<int>();
-    clock_t startTime = clock();
-    srand(66);
-    for (int i = 0; i < opCount; ++i) {
-        arrayQueue->enqueue(rand());
-    }
-    for (int j = 0; j < opCount; ++j) {
-        arrayQueue->dequeue();
-    }
-    clock_t endTime = clock();
-    std::cout << "ArrayQueue time: " << double(endTime - startTime) / CLOCKS_PER_SEC << " s"<< std::endl;
+    std::cout << "ArrayQueue time: " << testQueue(arrayQueue, opCount) << " s" << std::endl;
     LoopQueue<int> *loopQueue = new LoopQueue<int>();
-    startTime = clock();
-    srand(66);
-    for (int i = 0; i < opCount; ++i) {
-        loopQueue->enqueue(rand());
-    }
-    for (int j = 0; j < opCount; ++j) {
-        loopQueue->dequeue();
-    }
-    endTime = clock();
-    std::cout << "LoopQueue time: " << double(endTime - startTime) / CLOCKS_PER_SEC << " s"<< std::endl;
+    std::cout << "LoopQueue time: " << testQueue(loopQueue, opCount) << " s" << std::endl;
+    LinkListQueue<int> *linkListQueue = new LinkListQueue<int>();
+    std::cout << "LinkListQueue time: " << testQueue(linkListQueue, opCount) << " s" << std::endl;
     return 0;
 }

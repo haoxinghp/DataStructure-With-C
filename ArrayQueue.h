@@ -11,7 +11,7 @@
 template<class T>
 class ArrayQueue : public Queue<T> {
 public:
-    ArrayQueue(){
+    ArrayQueue() {
         array = new Array<T>(10);
     }
 
@@ -50,7 +50,7 @@ public:
     void print() {
         std::cout << "Queue: size = " << array->getSize() << ", capacity = " << array->getCapacity() << std::endl;
         std::cout << "front ";
-        array->toString();
+        array->toPrint();
         std::cout << " tail" << std::endl;
     }
 

@@ -200,10 +200,10 @@ public:
      */
     void print() {
         std::cout << "Array: size = " << size << ", capacity = " << capacity << std::endl;
-        toString();
+        toPrint();
     }
 
-    void toString() {
+    void toPrint() {
         std::cout << "[";
         for (int i = 0; i < size; ++i) {
             std::cout << data[i];
