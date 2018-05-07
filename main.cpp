@@ -3,20 +3,7 @@
 #include "ArrayStack.h"
 #include "ArrayQueue.h"
 #include "LoopQueue.h"
-
-template<typename T>
-static double testQueue(Queue<T> *queue, T rangeL, T rangeR, int opCount) {
-    clock_t startTime = clock();
-    srand(66);
-    for (int i = 0; i < opCount; ++i) {
-        queue->enqueue(INT32_MAX);
-    }
-    for (int j = 0; j < opCount; ++j) {
-        queue->dequeue();
-    }
-    clock_t endTime = clock();
-    return double(endTime - startTime) / CLOCKS_PER_SEC;
-}
+#include "LinkList.h"
 
 int main() {
     ArrayStack<int> *stack = new ArrayStack<int>(5);
@@ -54,6 +41,29 @@ int main() {
     loopQueue1->dequeue();
     loopQueue1->print();
     std::cout << loopQueue1->getFront() << std::endl;
+
+    Linklist<int> *linklist = new Linklist<int>();
+    for (int i = 0; i < 5; ++i) {
+        linklist->addFirst(i);
+    }
+    linklist->print();
+    linklist->remove(2);
+    linklist->print();
+    linklist->addLast(9);
+    linklist->print();
+    linklist->removeFirst();
+    linklist->print();
+    linklist->removeLast();
+    linklist->print();
+    std::cout << linklist->get(2) << " , " << linklist->getFirst() << " , " << linklist->getLast() << std::endl;
+    linklist->set(2, 70);
+    linklist->setFirst(50);
+    linklist->setLast(23);
+    linklist->print();
+    std::cout << linklist->get(2) << " , " << linklist->getFirst() << " , " << linklist->getLast() << std::endl;
+    std::cout << std::boolalpha << linklist->contains(1);
+    linklist->removeElement(1);
+    linklist->print();
 
     int opCount = 100000;
     ArrayQueue<int> *arrayQueue = new ArrayQueue<int>();
